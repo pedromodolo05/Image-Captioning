@@ -1,0 +1,57 @@
+# Image Captioning with CNN-LSTM
+
+This project explores deep learning-based image captioning using the **Flickr8k** dataset. We combine a **Convolutional Neural Network (CNN)** for image feature extraction with a **Long Short-Term Memory (LSTM)** model for generating text captions. We also compare three decoding strategies: **Greedy Search**, **Beam Search**, and **Top-k Sampling**.
+
+---
+
+## Objective
+To develop and evaluate an image captioning system that describes input images using natural language.
+
+---
+
+## Dataset: Flickr8k  
+- 8,000 images of everyday scenes
+- Each image has 5 human-written captions  
+- Images resized and processed using the **Xception** CNN  
+- Captions cleaned and tokenized (max length: 34 tokens)
+
+---
+
+## Model Architecture  
+- **CNN Encoder**: Xception (2048D features)
+- **Sequence Model**:
+  - Embedding layer
+  - LSTM with 256 units
+  - Merged with CNN features
+  - Dense output layer with softmax
+
+---
+
+## Decoding Strategies Compared
+| Strategy     | Description                                 |
+|--------------|---------------------------------------------|
+| Greedy       | Selects the highest probability word each step |
+| Beam Search  | Keeps top-k most probable sequences         |
+| Top-k        | Samples from the top-k likely words at each step |
+
+---
+
+## BLEU Scores (on test set)
+
+| Method      | BLEU-1 | BLEU-2 | BLEU-3 | BLEU-4 |
+|-------------|--------|--------|--------|--------|
+| Greedy      | 0.129  | 0.066  | 0.036  | 0.018  |
+| Beam Search | 0.131  | 0.068  | 0.038  | 0.019  |
+| Top-k       | 0.125  | 0.064  | 0.035  | 0.017  |
+
+---
+
+## Examples
+
+![Example Image](examples/sample1.jpg)  
+**Greedy**: "a dog is running in the field"  
+**Beam**: "a dog runs through grass with tongue out"  
+**Top-k**: "dog playing outside on the field"
+
+---
+
